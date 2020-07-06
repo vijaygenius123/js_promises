@@ -10,22 +10,32 @@
 <body>
 
     <script type="text/javascript">
-        let promise = new Promise((resolve, reject) => {
-            let a = 1 + 1
-            if (a == 2) {
-                resolve('Success')
+
+        const userLeft = false;
+        const userWatchingCatMeme = false;
+
+        function watchTutorialCallback(callback, errorCallback) {
+            if (userLeft) {
+                errorCallback({
+                    name: 'User Left',
+                    message: ':('
+                })
+            } else if (userWatchingCatMeme) {
+                errorCallback({
+                    name: 'User watching Cat Meme',
+                    message: 'WebDevSimplified < Cat'
+                })
             } else {
-                reject('Failed')
+                callback('Thumbs Up & Subscribe')
             }
+        }
+
+        watchTutorialCallback((message) => {
+            console.log('Success: ', message)
+        }, (error) => {
+            console.log('Error: ', error)
         })
 
-        promise
-            .then((result) => {
-                console.log(result)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
     </script>
 </body>
 
